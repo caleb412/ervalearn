@@ -1,0 +1,56 @@
+/* css/planning.css */
+.planning-section {
+  background-color: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.planning-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.planning-item:last-child {
+  border-bottom: none;
+}
+
+.time-slot {
+  width: 80px;
+  font-weight: 600;
+  color: #4d8af0;
+}
+
+.task-info {
+  flex: 1;
+}
+
+.task-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.task-description {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-left: 15px;
+}
+
+.status-pending {
+  background-color: #f39c12;
+}
+.status-completed {
+  background-color: #2ecc71;
+}
+.status-upcoming {
+  background-color: #3498db;
+}

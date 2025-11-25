@@ -1,0 +1,120 @@
+/* css/courses.css */
+.courses-section {
+  background-color: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.course-card {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.course-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.course-card.active {
+  border-color: #4d8af0;
+  background-color: #eef4ff;
+}
+
+.course-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.course-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.course-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Language specific colors */
+.french .course-icon {
+  background-color: #e74c3c;
+}
+.french .progress-fill {
+  background-color: #e74c3c;
+}
+
+.english .course-icon {
+  background-color: #2ecc71;
+}
+.english .progress-fill {
+  background-color: #2ecc71;
+}
+
+.spanish .course-icon {
+  background-color: #f39c12;
+}
+.spanish .progress-fill {
+  background-color: #f39c12;
+}
+
+.german .course-icon {
+  background-color: #9b59b6;
+}
+.german .progress-fill {
+  background-color: #9b59b6;
+}
+
+.italian .course-icon {
+  background-color: #1abc9c;
+}
+.italian .progress-fill {
+  background-color: #1abc9c;
+}
+
+.japanese .course-icon {
+  background-color: #34495e;
+}
+.japanese .progress-fill {
+  background-color: #34495e;
+}
