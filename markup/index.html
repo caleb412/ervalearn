@@ -1,355 +1,333 @@
-<!-- index.html -->
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ErvaLearn - Language Learning Platform</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <title>ErvaLearn - Language Learning Tracker</title>
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
-    <div class="container">
-      <header>
-        <div class="greeting">
-          <h1>Hello, welcome back!</h1>
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-icon">
+          <i><img src="../assets/icons/brain.png" alt="ErvaLearn logo" /></i>
         </div>
-        <div class="user-info">
-          <div class="user-avatar">U</div>
-          <div>
-            <div>User Name</div>
-            <div style="font-size: 0.875rem; color: #64748b">Basic Plan</div>
-          </div>
+        <span>ErvaLearn</span>
+      </div>
+
+      <div class="nav-menu">
+        <div class="nav-item active">
+          <i><img src="../assets/icons/home.png" alt="home icon" /></i>
+          <span>Overview</span>
         </div>
-      </header>
-
-      <div class="main-grid">
-        <!-- Left Column -->
-        <div>
-          <!-- Courses Section -->
-          <section class="section course-progress-component">
-            <div class="section-header">
-              <h2 class="section-title">My Courses</h2>
-              <a href="#" class="view-all">View All</a>
-            </div>
-
-            <div class="courses-grid">
-              <!-- French Course -->
-              <div class="course-card" data-course="french">
-                <div class="course-header">
-                  <div class="course-icon french">
-                    <i class="fas fa-flag-fr"></i>
-                  </div>
-                  <div class="course-name">French</div>
-                </div>
-                <div class="progress-info">
-                  <span>65% Complete</span>
-                  <span>26/40 Lessons</span>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress-fill french" style="width: 65%"></div>
-                </div>
-              </div>
-
-              <!-- English Course -->
-              <div class="course-card" data-course="english">
-                <div class="course-header">
-                  <div class="course-icon english">
-                    <i class="fas fa-flag-us"></i>
-                  </div>
-                  <div class="course-name">English</div>
-                </div>
-                <div class="progress-info">
-                  <span>82% Complete</span>
-                  <span>33/40 Lessons</span>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress-fill english" style="width: 82%"></div>
-                </div>
-              </div>
-
-              <!-- Spanish Course -->
-              <div class="course-card" data-course="spanish">
-                <div class="course-header">
-                  <div class="course-icon spanish">
-                    <i class="fas fa-flag-es"></i>
-                  </div>
-                  <div class="course-name">Spanish</div>
-                </div>
-                <div class="progress-info">
-                  <span>45% Complete</span>
-                  <span>18/40 Lessons</span>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress-fill spanish" style="width: 45%"></div>
-                </div>
-              </div>
-
-              <!-- German Course -->
-              <div class="course-card" data-course="german">
-                <div class="course-header">
-                  <div class="course-icon german">
-                    <i class="fas fa-flag-de"></i>
-                  </div>
-                  <div class="course-name">German</div>
-                </div>
-                <div class="progress-info">
-                  <span>30% Complete</span>
-                  <span>12/40 Lessons</span>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress-fill german" style="width: 30%"></div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Dictionary Section -->
-          <section class="section dictionary-component">
-            <div class="section-header">
-              <h2 class="section-title">Dictionary</h2>
-            </div>
-
-            <div class="search-bar">
-              <input
-                type="text"
-                placeholder="Search for words or phrases..."
-                id="dictionary-search"
-              />
-              <button id="search-button"><i class="fas fa-search"></i></button>
-            </div>
-
-            <div id="dictionary-results">
-              <!-- Results will be populated by API -->
-              <div class="word-card">
-                <div class="word">Bonjour</div>
-                <div class="phonetic">/bɔ̃.ʒuʁ/</div>
-                <div class="definition">
-                  A common French greeting meaning "hello" or "good day".
-                </div>
-              </div>
-
-              <div class="word-card">
-                <div class="word">Merci</div>
-                <div class="phonetic">/mɛʁ.si/</div>
-                <div class="definition">French word for "thank you".</div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Quiz Section -->
-          <section class="section quiz-component">
-            <div class="section-header">
-              <h2 class="section-title">Daily Quiz</h2>
-            </div>
-
-            <div class="quiz-question">
-              What is the French word for "water"?
-            </div>
-
-            <div class="quiz-options">
-              <div class="quiz-option" data-answer="false">Pain</div>
-              <div class="quiz-option" data-answer="true">Eau</div>
-              <div class="quiz-option" data-answer="false">Lait</div>
-              <div class="quiz-option" data-answer="false">Vin</div>
-            </div>
-
-            <button
-              class="submit-btn"
-              style="
-                margin-top: 20px;
-                padding: 10px 20px;
-                background: #3b82f6;
-                color: white;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-              "
-            >
-              Submit Answer
-            </button>
-          </section>
+        <div class="nav-item">
+          <i
+            ><img src="../assets/icons/book-bookmark.png" alt="course icon"
+          /></i>
+          <span>Course</span>
         </div>
-
-        <!-- Right Column - Progress Stats -->
-        <div>
-          <section class="section">
-            <h2 class="section-title">Learning Statistics</h2>
-
-            <div class="progress-stats">
-              <div class="stat-card">
-                <div class="stat-value">02</div>
-                <div class="stat-label">Courses Completed</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-value">250</div>
-                <div class="stat-label">Total Points</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-value">03</div>
-                <div class="stat-label">In Progress</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-value">05</div>
-                <div class="stat-label">Tasks Finished</div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Progress Chart Placeholder -->
-          <section class="section">
-            <h2 class="section-title">Weekly Progress</h2>
-            <div
-              style="
-                height: 200px;
-                display: flex;
-                align-items: flex-end;
-                justify-content: space-around;
-                margin-top: 24px;
-              "
-            >
-              <div
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                "
-              >
-                <div
-                  style="
-                    width: 40px;
-                    background: #e2e8f0;
-                    height: 120px;
-                    border-radius: 4px 4px 0 0;
-                    display: flex;
-                    align-items: flex-end;
-                  "
-                >
-                  <div
-                    style="
-                      width: 100%;
-                      background: #ef4444;
-                      height: 80px;
-                      border-radius: 4px 4px 0 0;
-                    "
-                  ></div>
-                </div>
-                <div
-                  style="margin-top: 8px; font-size: 0.875rem; color: #64748b"
-                >
-                  Mon
-                </div>
-              </div>
-              <div
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                "
-              >
-                <div
-                  style="
-                    width: 40px;
-                    background: #e2e8f0;
-                    height: 120px;
-                    border-radius: 4px 4px 0 0;
-                    display: flex;
-                    align-items: flex-end;
-                  "
-                >
-                  <div
-                    style="
-                      width: 100%;
-                      background: #10b981;
-                      height: 100px;
-                      border-radius: 4px 4px 0 0;
-                    "
-                  ></div>
-                </div>
-                <div
-                  style="margin-top: 8px; font-size: 0.875rem; color: #64748b"
-                >
-                  Tue
-                </div>
-              </div>
-              <div
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                "
-              >
-                <div
-                  style="
-                    width: 40px;
-                    background: #e2e8f0;
-                    height: 120px;
-                    border-radius: 4px 4px 0 0;
-                    display: flex;
-                    align-items: flex-end;
-                  "
-                >
-                  <div
-                    style="
-                      width: 100%;
-                      background: #f59e0b;
-                      height: 90px;
-                      border-radius: 4px 4px 0 0;
-                    "
-                  ></div>
-                </div>
-                <div
-                  style="margin-top: 8px; font-size: 0.875rem; color: #64748b"
-                >
-                  Wed
-                </div>
-              </div>
-              <div
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                "
-              >
-                <div
-                  style="
-                    width: 40px;
-                    background: #e2e8f0;
-                    height: 120px;
-                    border-radius: 4px 4px 0 0;
-                    display: flex;
-                    align-items: flex-end;
-                  "
-                >
-                  <div
-                    style="
-                      width: 100%;
-                      background: #8b5cf6;
-                      height: 110px;
-                      border-radius: 4px 4px 0 0;
-                    "
-                  ></div>
-                </div>
-                <div
-                  style="margin-top: 8px; font-size: 0.875rem; color: #64748b"
-                >
-                  Thu
-                </div>
-              </div>
-            </div>
-          </section>
+        <div class="nav-item">
+          <i
+            ><img src="../assets/icons/portfolio.png" alt="resources icon"
+          /></i>
+          <span>Resources</span>
+        </div>
+        <div class="nav-item">
+          <i><img src="../assets/icons/envelope.png" alt="messages icon" /></i>
+          <span>Message</span>
+        </div>
+        <div class="nav-item">
+          <i><img src="../assets/icons/settings.png" alt="settings icon" /></i>
+          <span>Settings</span>
         </div>
       </div>
     </div>
 
-    <!-- Future component integration points -->
-    <script>
-      // Component initialization logic will go here
-      // Dictionary API integration point
-      // Quiz logic will be implemented here
-    </script>
+    <div class="main-content">
+      <div class="content-area">
+        <div class="header">
+          <div class="welcome">Hello Caleb, welcome back!</div>
+          <div class="search-bar">
+            <span class="search-icon"
+              ><img src="../assets/icons/search.png" alt="search icon"
+            /></span>
+            <input type="text" placeholder="Search..." />
+          </div>
+        </div>
+
+        <div class="section-title">
+          My Courses
+          <span class="view-all">View All</span>
+        </div>
+
+        <div class="course-grid">
+          <div class="course-card">
+            <div class="course-name">French</div>
+            <div class="lessons-count">35 lessons</div>
+            <div class="progress-container">
+              <div class="progress-circle">75%</div>
+              <div class="progress-text">Complete</div>
+            </div>
+          </div>
+
+          <div class="course-card orange">
+            <div class="course-name">Portuguese</div>
+            <div class="lessons-count">30 lessons</div>
+            <div class="progress-container">
+              <div class="progress-circle">50%</div>
+              <div class="progress-text">Complete</div>
+            </div>
+          </div>
+
+          <div class="course-card green">
+            <div class="course-name">Italian</div>
+            <div class="lessons-count">20 lessons</div>
+            <div class="progress-container">
+              <div class="progress-circle">25%</div>
+              <div class="progress-text">Complete</div>
+            </div>
+          </div>
+
+          <div class="course-card yellow">
+            <div class="course-name">German</div>
+            <div class="lessons-count">40 lessons</div>
+            <div class="progress-container">
+              <div class="progress-circle">75%</div>
+              <div class="progress-text">Complete</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="planning-section">
+          <div class="planning-header">
+            <div class="planning-title">Planning</div>
+            <div class="view-all">View All</div>
+          </div>
+
+          <div class="schedule-grid">
+            <div class="schedule-item">
+              <div class="schedule-info">
+                <div class="schedule-icon blue">
+                  <img
+                    src="../assets/icons/book-open-cover.png"
+                    alt="reading icon"
+                  />
+                </div>
+                <div class="schedule-details">
+                  <div class="schedule-title">Reading - Beginner Topic 1</div>
+                  <div class="schedule-time">8:00 AM - 10:00 AM</div>
+                </div>
+              </div>
+              <div class="more-options">⋯</div>
+            </div>
+
+            <div class="schedule-item">
+              <div class="schedule-info">
+                <div class="schedule-icon orange">
+                  <img src="../assets/icons/pencil.png" alt="writing icon" />
+                </div>
+                <div class="schedule-details">
+                  <div class="schedule-title">Writing - Beginner Topic 1</div>
+                  <div class="schedule-time">01:00 PM - 02:00 PM</div>
+                </div>
+              </div>
+              <div class="more-options">⋯</div>
+            </div>
+
+            <div class="schedule-item">
+              <div class="schedule-info">
+                <div class="schedule-icon green">
+                  <img
+                    src="../assets/icons/head-side-headphones.png"
+                    alt="Listening icon"
+                  />
+                </div>
+                <div class="schedule-details">
+                  <div class="schedule-title">
+                    Listening - Intermediate Topic 1
+                  </div>
+                  <div class="schedule-time">03:00 PM - 04:00 PM</div>
+                </div>
+              </div>
+              <div class="more-options">⋯</div>
+            </div>
+
+            <div class="schedule-item">
+              <div class="schedule-info">
+                <div class="schedule-icon yellow">
+                  <img
+                    src="../assets/icons/megaphone-sound-waves.png"
+                    alt="speaking icon"
+                  />
+                </div>
+                <div class="schedule-details">
+                  <div class="schedule-title">Speaking - Advanced Topic 1</div>
+                  <div class="schedule-time">07:00 PM - 08:00 PM</div>
+                </div>
+              </div>
+              <div class="more-options">⋯</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dictionary-section">
+          <div class="dictionary-header">
+            <div class="dictionary-title">Dictionary</div>
+          </div>
+
+          <div class="dictionary-list">
+            <div class="dictionary-item">
+              <div class="word-info">
+                <div class="word">Bonjour</div>
+                <div class="translation">Hello / Good morning</div>
+                <div class="word-category">Greeting</div>
+              </div>
+            </div>
+
+            <div class="dictionary-item">
+              <div class="word-info">
+                <div class="word">Obrigado</div>
+                <div class="translation">Thank you</div>
+                <div class="word-category">Expression</div>
+              </div>
+            </div>
+
+            <div class="dictionary-item">
+              <div class="word-info">
+                <div class="word">Ciao</div>
+                <div class="translation">Hello / Goodbye</div>
+                <div class="word-category">Greeting</div>
+              </div>
+            </div>
+
+            <div class="dictionary-item">
+              <div class="word-info">
+                <div class="word">Danke</div>
+                <div class="translation">Thank you</div>
+                <div class="word-category">Expression</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-cards-section">
+          <div class="test-cards-header">
+            <div class="test-cards-title">Test Cards</div>
+          </div>
+
+          <div class="test-cards-grid">
+            <div class="test-card">
+              <div class="test-card-header">
+                <div class="test-card-title">French Vocabulary</div>
+                <div class="test-card-progress">12/20 completed</div>
+              </div>
+              <div class="test-card-content">
+                <div class="test-question">
+                  What is the French word for "hello"?
+                </div>
+                <div class="test-answer">Bonjour</div>
+              </div>
+              <div class="test-card-footer">
+                <div class="test-date">Last reviewed: 2 days ago</div>
+              </div>
+            </div>
+
+            <div class="test-card">
+              <div class="test-card-header">
+                <div class="test-card-title">Portuguese Phrases</div>
+                <div class="test-card-progress">8/15 completed</div>
+              </div>
+              <div class="test-card-content">
+                <div class="test-question">
+                  How do you say "thank you" in Portuguese?
+                </div>
+                <div class="test-answer">Obrigado</div>
+              </div>
+              <div class="test-card-footer">
+                <div class="test-date">Last reviewed: 3 days ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-section">
+        <div class="user-profile">
+          <div class="user-avatar">CC</div>
+          <div class="user-info">
+            <div class="user-name">Caleb Chanda</div>
+            <div class="user-plan">Basic Plan</div>
+          </div>
+          <div class="dropdown-icon">
+            <img
+              src="../assets/icons/dropdown-select.png"
+              alt="dropdown icon"
+            />
+          </div>
+        </div>
+
+        <div class="stats-header">Statistics</div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Courses Completed</div>
+            <div class="stat-value">02</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total Points Gained</div>
+            <div class="stat-value">250</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Courses In Progress</div>
+            <div class="stat-value">03</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Tasks Finished</div>
+            <div class="stat-value">05</div>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <div class="progress-title">Progress</div>
+            <div class="time-filter">
+              <button class="filter-btn">Day</button>
+              <button class="filter-btn active">Week</button>
+              <button class="filter-btn">Month</button>
+            </div>
+          </div>
+
+          <div class="progress-chart">
+            <div class="chart-bar-container">
+              <div class="chart-bar" style="height: 80px"></div>
+              <div class="chart-label">Mon</div>
+            </div>
+            <div class="chart-bar-container">
+              <div class="chart-bar" style="height: 100px"></div>
+              <div class="chart-label">Tue</div>
+            </div>
+            <div class="chart-bar-container">
+              <div class="chart-bar" style="height: 60px"></div>
+              <div class="chart-label">Wed</div>
+            </div>
+            <div class="chart-bar-container">
+              <div class="chart-bar highlight" style="height: 120px"></div>
+              <div class="chart-label">Thu</div>
+            </div>
+            <div class="chart-bar-container">
+              <div class="chart-bar" style="height: 90px"></div>
+              <div class="chart-label">Fri</div>
+            </div>
+            <div class="chart-bar-container">
+              <div class="chart-bar" style="height: 110px"></div>
+              <div class="chart-label">Sat</div>
+            </div>
+            <div class="chart-bar-container">
+              <div class="chart-bar" style="height: 95px"></div>
+              <div class="chart-label">Sun</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
