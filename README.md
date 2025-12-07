@@ -83,7 +83,7 @@ The application follows a component-based architecture with clear separation of 
 
 ```
 src/
-├── components/     # UI components
+├── view/     # UI components
 ├── framework/      # Rendering framework
 ├── model/          # Data models
 ├── mock/           # Mock data
