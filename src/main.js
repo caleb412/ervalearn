@@ -1,4 +1,4 @@
-import { Sidebar } from "./components/sidebar.js";
+import { Sidebar } from "./view/sidebar.js";
 import { MainSectionPresenter } from "./presenter/main-section-presenter.js";
 import { StatsSectionPresenter } from "./presenter/stats-section-presenter.js";
 import { render, RenderPosition } from "./framework/render.js";
