@@ -9,16 +9,6 @@ export class FilterBar extends AbstractComponent {
     return `
       <div class="filter-bar">
         <div class="filter-group">
-          <label for="filter-language">Filter by Language:</label>
-          <select id="filter-language" class="filter-select">
-            <option value="all">All Languages</option>
-            <option value="french">French</option>
-            <option value="portuguese">Portuguese</option>
-            <option value="italian">Italian</option>
-            <option value="german">German</option>
-          </select>
-        </div>
-        <div class="filter-group">
           <label for="filter-task-type">Filter by Type:</label>
           <select id="filter-task-type" class="filter-select">
             <option value="all">All Types</option>

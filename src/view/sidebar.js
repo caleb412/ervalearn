@@ -16,29 +16,24 @@ export class Sidebar extends AbstractComponent {
         </div>
 
         <div class="nav-menu">
-          <div class="nav-item active">
+          <div class="nav-item active" data-tab="home">
             <i><img src="assets/icons/home.png" alt="home icon" /></i>
-            <span>Overview</span>
+            <span>Главная</span>
           </div>
-          <div class="nav-item">
-            <i><img src="assets/icons/book-bookmark.png" alt="course icon" /></i>
-            <span>Course</span>
+          <div class="nav-item" data-tab="tests">
+            <i><img src="assets/icons/book-bookmark.png" alt="tests icon" /></i>
+            <span>Тесты</span>
           </div>
-          <div class="nav-item">
-            <i><img src="assets/icons/portfolio.png" alt="resources icon" /></i>
-            <span>Resources</span>
+          <div class="nav-item" data-tab="dictionary">
+            <i><img src="assets/icons/portfolio.png" alt="dictionary icon" /></i>
+            <span>Словарь</span>
           </div>
-          <div class="nav-item">
-            <i><img src="assets/icons/envelope.png" alt="messages icon" /></i>
-            <span>Message</span>
-          </div>
-          <div class="nav-item">
+          <div class="nav-item" data-tab="settings">
             <i><img src="assets/icons/settings.png" alt="settings icon" /></i>
-            <span>Settings</span>
+            <span>Настройки</span>
           </div>
         </div>
       </div>
     `;
   }
 }
-

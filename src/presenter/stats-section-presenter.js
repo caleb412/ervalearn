@@ -1,10 +1,11 @@
 import { StatsSection } from "../view/stats-section.js";
 import { UserProfile } from "../view/user-profile.js";
-import { StatsGrid } from "../view/stats-grid.js";
-import { ProgressChart } from "../view/progress-chart.js";
+import { StatBlocks } from "../view/stat-blocks.js";
+import { WordOfTheDay } from "../view/word-of-the-day.js";
 import { render, RenderPosition } from "../framework/render.js";
 import { TaskModel } from "../model/task-model.js";
 import { CourseModel } from "../model/course-model.js";
+import { ENGLISH_WORDS } from "../mock/english-words.js";
 
 export class StatsSectionPresenter {
   constructor(container, taskModel, courseModel) {
@@ -15,6 +16,13 @@ export class StatsSectionPresenter {
 
   init() {
     this._renderStatsSection();
+
+    // Subscribe to model changes for auto-refresh
+    this._taskModel.subscribe(() => {
+      if (!this._taskModel.isLoading()) {
+        this.refresh();
+      }
+    });
   }
 
   _renderStatsSection() {
@@ -30,30 +38,29 @@ export class StatsSectionPresenter {
       const userProfile = new UserProfile();
       render(userProfile, newStatsSection, RenderPosition.BEFOREEND);
 
-      const stats = this._calculateStats();
-      const statsGrid = new StatsGrid(stats);
-      render(statsGrid, newStatsSection, RenderPosition.BEFOREEND);
+      const statBlocksData = this._calculateStatBlocks();
+      const statBlocks = new StatBlocks(statBlocksData);
+      render(statBlocks, newStatsSection, RenderPosition.BEFOREEND);
 
-      const chartData = this._getChartData();
-      const progressChart = new ProgressChart(chartData);
-      render(progressChart, newStatsSection, RenderPosition.BEFOREEND);
+      const wordOfTheDay = this._getWordOfTheDay();
+      const wordOfTheDayComponent = new WordOfTheDay(wordOfTheDay);
+      render(wordOfTheDayComponent, newStatsSection, RenderPosition.BEFOREEND);
 
       this._attachEventListeners();
     }
   }
 
   _calculateStats() {
-    const courses = this._courseModel.getCourses();
+    const course = this._courseModel.getCourse();
     const tasks = this._taskModel.getTasks();
     const completedTasks = tasks.filter((task) => task.completed);
-    const completedCourses = courses.filter(
-      (course) => course.progress === 100
-    );
+    const isCourseCompleted = course.progress === 100;
+    const isCourseInProgress = course.progress > 0 && course.progress < 100;
 
     return [
       {
         label: "Courses Completed",
-        value: String(completedCourses.length).padStart(2, "0"),
+        value: String(isCourseCompleted ? 1 : 0).padStart(2, "0"),
       },
       {
         label: "Total Points Gained",
@@ -61,9 +68,7 @@ export class StatsSectionPresenter {
       },
       {
         label: "Courses In Progress",
-        value: String(
-          courses.filter((c) => c.progress > 0 && c.progress < 100).length
-        ).padStart(2, "0"),
+        value: String(isCourseInProgress ? 1 : 0).padStart(2, "0"),
       },
       {
         label: "Tasks Finished",
@@ -84,6 +89,52 @@ export class StatsSectionPresenter {
     ];
   }
 
+  _calculateStatBlocks() {
+    const tasks = this._taskModel.getTasks();
+    const completedTasks = tasks.filter((task) => task.completed);
+    const unfinishedTasks = tasks.filter((task) => !task.completed);
+
+    // Calculate learning streak (consecutive days with completed tasks)
+
+    const learningStreak = this._calculateLearningStreak();
+
+    return [
+      {
+        label: "Learning Streak",
+        value: String(learningStreak),
+      },
+      {
+        label: "Unfinished Tasks",
+        value: String(unfinishedTasks.length),
+      },
+      {
+        label: "Tasks Finished",
+        value: String(completedTasks.length),
+      },
+    ];
+  }
+
+  _calculateLearningStreak() {
+    // Simple streak calculation - count consecutive completed tasks
+    const tasks = this._taskModel.getTasks();
+    const completedTasks = tasks.filter((task) => task.completed);
+
+    // Return a simple streak based on completed tasks
+    if (completedTasks.length === 0) return 0;
+
+    // streak = completed tasks / 2 (rounded)
+    return Math.max(1, Math.floor(completedTasks.length / 2));
+  }
+
+  _getWordOfTheDay() {
+    // Get a random word from the list. Use date-based seed to get same word for the day
+    const today = new Date();
+    const seed =
+      today.getFullYear() * 10000 + today.getMonth() * 100 + today.getDate();
+    const randomIndex = seed % ENGLISH_WORDS.length;
+    return ENGLISH_WORDS[randomIndex];
+  }
+
   //TO-DO: Come back to this for future implementation
   _attachEventListeners() {
     const filterButtons = this._container.querySelectorAll(".filter-btn");
@@ -98,13 +149,14 @@ export class StatsSectionPresenter {
   refresh() {
     const statsSectionElement = this._container.querySelector(".stats-section");
     if (statsSectionElement) {
-      const oldStatsGridContainer =
-        statsSectionElement.querySelector(".stats-grid")?.parentElement;
-      if (oldStatsGridContainer) {
-        const newStats = this._calculateStats();
-        const statsGrid = new StatsGrid(newStats);
-        oldStatsGridContainer.replaceWith(statsGrid.getElement());
+      const oldStatBlocks = statsSectionElement.querySelector(".stat-blocks");
+
+      if (oldStatBlocks) {
+        const newStatBlocksData = this._calculateStatBlocks();
+        const statBlocks = new StatBlocks(newStatBlocksData);
+        oldStatBlocks.replaceWith(statBlocks.getElement());
       } else {
+        // If stat blocks don't exist, re-render the entire section
         this._renderStatsSection();
       }
     }

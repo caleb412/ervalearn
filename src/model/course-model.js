@@ -1,16 +1,11 @@
 export class CourseModel {
   constructor(taskModel = null) {
-    this._courses = [
-      { name: "French", lessonsCount: 0, completedLessons: 0, color: "blue" },
-      {
-        name: "Portuguese",
-        lessonsCount: 0,
-        completedLessons: 0,
-        color: "orange",
-      },
-      { name: "Italian", lessonsCount: 0, completedLessons: 0, color: "green" },
-      { name: "German", lessonsCount: 0, completedLessons: 0, color: "yellow" },
-    ];
+    this._course = {
+      name: "English",
+      lessonsCount: 0,
+      completedLessons: 0,
+      color: "blue"
+    };
 
     if (taskModel) {
       this._initializeFromTasks(taskModel);
@@ -19,75 +14,37 @@ export class CourseModel {
 
   _initializeFromTasks(taskModel) {
     const tasks = taskModel.getTasks();
-    const languageCounts = {};
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter((task) => task.completed).length;
 
-    tasks.forEach((task) => {
-      if (!languageCounts[task.language]) {
-        languageCounts[task.language] = { total: 0, completed: 0 };
-      }
-      languageCounts[task.language].total++;
-      if (task.completed) {
-        languageCounts[task.language].completed++;
-      }
-    });
-
-    Object.keys(languageCounts).forEach((language) => {
-      const course = this.getCourseByName(language);
-      if (course) {
-        course.lessonsCount = languageCounts[language].total;
-        course.completedLessons = languageCounts[language].completed;
-      }
-    });
+    this._course.lessonsCount = totalTasks;
+    this._course.completedLessons = completedTasks;
   }
 
-  getCourses() {
-    return this._courses.map((course) => ({
-      ...course,
+  getCourse() {
+    return {
+      ...this._course,
       progress: this._calculateProgress(
-        course.completedLessons,
-        course.lessonsCount
+        this._course.completedLessons,
+        this._course.lessonsCount
       ),
-    }));
+    };
   }
 
-  getCourseByName(name) {
-    return this._courses.find(
-      (course) => course.name.toLowerCase() === name.toLowerCase()
-    );
+  updateCourseLessons(increment = 1) {
+    this._course.lessonsCount += increment;
+    return this.getCourse();
   }
 
-  updateCourseLessons(language, increment = 1) {
-    const course = this.getCourseByName(language);
-    if (course) {
-      course.lessonsCount += increment;
-      return {
-        ...course,
-        progress: this._calculateProgress(
-          course.completedLessons,
-          course.lessonsCount
-        ),
-      };
+  updateCourseProgress(taskModel) {
+    if (taskModel) {
+      const tasks = taskModel.getTasks();
+      const completedTasks = tasks.filter((task) => task.completed);
+      
+      this._course.lessonsCount = tasks.length;
+      this._course.completedLessons = completedTasks.length;
     }
-    return null;
-  }
-
-  updateCourseProgress(language, taskModel) {
-    const course = this.getCourseByName(language);
-    if (course && taskModel) {
-      const languageTasks = taskModel.getTasksByLanguage(language);
-      const completedTasks = languageTasks.filter((task) => task.completed);
-
-      course.completedLessons = completedTasks.length;
-
-      return {
-        ...course,
-        progress: this._calculateProgress(
-          course.completedLessons,
-          course.lessonsCount
-        ),
-      };
-    }
-    return null;
+    return this.getCourse();
   }
 
   _calculateProgress(completed, total) {

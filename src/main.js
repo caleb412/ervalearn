@@ -4,21 +4,59 @@ import { StatsSectionPresenter } from "./presenter/stats-section-presenter.js";
 import { render, RenderPosition } from "./framework/render.js";
 import { TaskModel } from "./model/task-model.js";
 import { CourseModel } from "./model/course-model.js";
-import { DictionaryModel } from "./model/dictionary-model.js";
 import { TestCardModel } from "./model/test-card-model.js";
 
 class App {
   constructor() {
     this._taskModel = new TaskModel();
     this._courseModel = new CourseModel(this._taskModel);
-    this._dictionaryModel = new DictionaryModel();
     this._testCardModel = new TestCardModel();
+    this._isInitializing = false;
   }
 
-  init() {
+  async init() {
     this._renderSidebar();
+    await this._initializeData();
     this._initMainSection();
     this._initStatsSection();
+  }
+
+  async _initializeData() {
+    this._isInitializing = true;
+    this._showLoading();
+    
+    try {
+      await Promise.all([
+        this._taskModel.initialize(),
+        this._testCardModel.initialize(),
+      ]);
+      // Update course model after tasks are loaded
+      this._courseModel = new CourseModel(this._taskModel);
+    } catch (error) {
+    } finally {
+      this._isInitializing = false;
+      this._hideLoading();
+    }
+  }
+
+  _showLoading() {
+    if (document.querySelector(".loading-overlay")) return; // Prevent duplicate overlays
+    const loading = document.createElement("div");
+    loading.className = "loading-overlay";
+    loading.innerHTML = `
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    `;
+    document.body.appendChild(loading);
+  }
+
+  _hideLoading() {
+    const loading = document.querySelector(".loading-overlay");
+    if (loading) {
+      loading.remove();
+    }
   }
 
   _renderSidebar() {
@@ -35,10 +73,31 @@ class App {
     const navItems = document.querySelectorAll(".nav-item");
     navItems.forEach((item) => {
       item.addEventListener("click", () => {
-        navItems.forEach((nav) => nav.classList.remove("active"));
-        item.classList.add("active");
+        const tabName = item.dataset.tab;
+        if (tabName) {
+          this._switchTab(tabName);
+          navItems.forEach((nav) => nav.classList.remove("active"));
+          item.classList.add("active");
+        }
       });
     });
+  }
+
+  _switchTab(tabName) {
+    const tabPanes = document.querySelectorAll(".tab-pane");
+    tabPanes.forEach((pane) => {
+      if (pane.dataset.tab === tabName) {
+        pane.classList.add("active");
+      } else {
+        pane.classList.remove("active");
+      }
+    });
+
+    // Only re-render main section for dictionary tab (as per requirements)
+    if (tabName === "dictionary" && this._mainSectionPresenter) {
+      this._mainSectionPresenter.renderDictionaryTab();
+    }
+    // Home and Tests tabs just show/hide existing content, no re-render needed
   }
 
   _initMainSection() {
@@ -48,7 +107,6 @@ class App {
         mainContent,
         this._taskModel,
         this._courseModel,
-        this._dictionaryModel,
         this._testCardModel
       );
       this._mainSectionPresenter.init();

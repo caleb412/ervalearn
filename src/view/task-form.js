@@ -31,16 +31,6 @@ export class TaskForm extends AbstractComponent {
             <label for="task-time">Time</label>
             <input type="text" id="task-time" name="time" placeholder="e.g., 8:00 AM - 10:00 AM" required />
           </div>
-          <div class="form-group">
-            <label for="task-language">Language</label>
-            <select id="task-language" name="language" required>
-              <option value="">Select language</option>
-              <option value="french">French</option>
-              <option value="portuguese">Portuguese</option>
-              <option value="italian">Italian</option>
-              <option value="german">German</option>
-            </select>
-          </div>
           <div class="form-actions">
             <button type="submit" class="submit-btn">${submitButtonText}</button>
             <button type="button" class="cancel-btn">Cancel</button>
